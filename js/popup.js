@@ -25,8 +25,16 @@ function updateMessages(){
   });
 }
 
+function clearCount(){
+  chrome.runtime.sendMessage({"clear_count": true,},function(response) {
+    console.log(response);
+  });
+}
+
 // 定周期でPopupを更新する
 $(document).ready(function() {
   updateMessages();
+  clearCount();
+
   setInterval(updateMessages,intervalTime);
 });
