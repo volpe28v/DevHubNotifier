@@ -1,40 +1,34 @@
-var intervalTime = 1000;
+var message_list = new Vue({
+  el: '#message_list',
+  data: {
+    messages: []
+  },
 
-function updateMessages(){
-  var messages = chrome.extension.getBackgroundPage().messages;
+  created: function () {
+    this.loadMessages();
+  },
 
-  $("#list").empty();
-  messages.forEach(function(message){
-    $("#list").append(
-      $('<tr>').append(
-        $('<td>').addClass('time').attr("nowrap",'').append(
-          $('<div/>').html(moment(message.date).format('YYYY-MM-DD'))
-        )
-      ).append(
-        $('<td>').addClass("title").attr("nowrap",'').append(
-          $('<div/>').html(message.name)
-        )
-      ).append(
-        $('<td>').addClass("msg").attr("nowrap",'').append(
-          $('<div/>').html(message.msg).append(
-            $('<span/>').addClass("from-now").html(moment(message.date).fromNow())
-          )
-        )
-      )
-    )
-  });
-}
+  filters: {
+    formatDate: function (d) {
+      return moment(d).format('YYYY-MM-DD');
+    },
+    fromNow: function (d) {
+      return moment(d).fromNow();
+    }
+  },
+
+  methods: {
+    loadMessages: function(){
+      this.messages = chrome.extension.getBackgroundPage().messages;
+    }
+  }
+});
 
 function clearCount(){
   chrome.runtime.sendMessage({"clear_count": true,},function(response) {
-    console.log(response);
   });
 }
 
-// 定周期でPopupを更新する
 $(document).ready(function() {
-  updateMessages();
   clearCount();
-
-  setInterval(updateMessages,intervalTime);
 });

@@ -5,10 +5,20 @@
     <link href="css/popup.css" media="all" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <div id="abst">DevHub Messages</div>
-    <table id="list"></table>
+    <div id="message_list">
+      <div id="abst">DevHub Messages</div>
+      <table>
+        <tr v-repeat="messages">
+          <td class="time" nowrap>{{date | formatDate}}</td>
+          <td class="title" nowrap>{{name}}</td>
+          <td class="msg" nowrap>{{msg}}</td>
+          <td class="from-now" nowrap>{{date | fromNow}}</td>
+        </tr>
+      </table>
+    </div>
   </body>
   <script src="js/jquery.min.js"></script>
+  <script src="js/vue.js"></script>
   <script src="js/moment.min.js"></script>
   <script src="js/popup.js"></script>
 </html>
