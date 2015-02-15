@@ -35,8 +35,12 @@ body {
   color: red;
 }
 
-.title {
-  width: 100%;
+.avatar img {
+  padding: 1px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .from-now {

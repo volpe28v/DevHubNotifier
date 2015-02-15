@@ -11,6 +11,9 @@ function updateBadge(count){
 function setWebSocket(url){
   var socket = io.connect(url ,{query: 'from=chrome'});
   socket.on('message', function(data){
+    if (data.avatar && !data.avatar.match(/^http/)){
+      data.avatar = url + data.avatar;
+    }
     messages.unshift(data);
     if (MAX_MESSAGE_COUNT <= messages.length){
       messages.pop();
@@ -22,7 +25,7 @@ function setWebSocket(url){
 
 var MAX_MESSAGE_COUNT = 30;
 // とりあえず固定で指定(オプションから出来るようにする)
-var urls = ["http://dev-hub.herokuapp.com/","http://localhost:3000/"];
+var urls = ["http://dev-hub.herokuapp.com","http://localhost:3000"];
 
 var message_count = 0;
 var messages = [];

@@ -5,6 +5,7 @@
     "description": "DevHubの発言を通知",
     "icons": { "48": "icons/icon_048.png",
               "128": "icons/icon_128.png" },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "background": {
       "persistent": false,
       "scripts": ["js/jquery.min.js", "js/socket.io.js", "js/background.js"]
