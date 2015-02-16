@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DevHubNotifier</title>
+    <link rel="stylesheet" href="css/chrome-bootstrap.css">
+    <style>
+      .chrome-bootstrap .frame .view {
+        -webkit-margin-start: 170px
+      }
+
+      .title{
+        width: 100px;
+      }
+
+      .url {
+        width: 350px;
+      }
+
+      #success_message {
+        margin-top: 10px;
+        padding: 5px 10px;
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+      }
+
+      #success_message.visible {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body class="chrome-bootstrap">
+    <div class="frame">
+      <div class="navigation">
+        <h1>
+          <a href="https://github.com/volpe28v/DevHubNotifier">DevHubNotifier</a>
+        </h1>
+        <ul class="menu">
+          <li class="selected">
+            <a href="#url">URL</a>
+          </li>
+        </ul>
+      </div>
+      <div class="mainview view">
+        <div id="settings" class="selected">
+          <header>
+            <h1>URL</h1>
+          </header>
+          <div id="devhub_url_app" class="content">
+            <section>
+              <h3>DevHub URL</h3>
+              <input
+                type="text"
+                id="new_title"
+                class="title"
+                autofocus
+                autocomplete="off"
+                placeholder="Title"
+                v-model="newTitle"
+                v-on="keyup:addUrl| key enter"
+              >
+              <input
+                type="text"
+                id="new_url"
+                class="url"
+                autofocus
+                autocomplete="off"
+                placeholder="URL"
+                v-model="newUrl"
+                v-on="keyup:addUrl| key enter"
+              >
+
+              <ul>
+                <li v-repeat="urls">
+                  <label v-text="title"></label> - <label v-text="url"></label>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/options.js"></script>
+  </body>
+</html>
+

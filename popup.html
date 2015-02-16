@@ -8,11 +8,11 @@
     <div id="message_list">
       <table>
         <tr v-repeat="messages">
-          <td class="time" nowrap>{{date | formatDate}}</td>
           <td v-show="!avatar" class="name" nowrap>{{name}}</td>
           <td v-show="avatar" class="avatar" nowrap><img v-attr="src:'{{avatar}}', alt:'{{name}}'"></td>
           <td class="msg" nowrap>{{msg}}</td>
           <td class="from-now" nowrap>{{date | fromNow}}</td>
+          <td class="time" nowrap>{{date | formatDate}}</td>
         </tr>
       </table>
     </div>

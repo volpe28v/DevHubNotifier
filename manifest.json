@@ -16,5 +16,6 @@
       "default_icon" : "icons/icon.png",
       "default_title" : "Popup",
       "default_popup" : "popup.html"
-    }
+    },
+    "options_page": "options.html"
 }
