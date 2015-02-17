@@ -19,7 +19,7 @@ var message_list = new Vue({
 
   methods: {
     loadMessages: function(){
-      this.messages = chrome.extension.getBackgroundPage().messages;
+      this.messages = chrome.extension.getBackgroundPage().devhubSocket.messages;
     }
   }
 });

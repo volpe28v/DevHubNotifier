@@ -4,15 +4,15 @@ var storage = {
   fetch: function () {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   },
-  save: function (todos) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  save: function (urls) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(urls));
   }
 };
 
 var devhub_url = new Vue({
   el: '#devhub_url_app',
   data: {
-    urls: storage.fetch(), 
+    urls: storage.fetch(),
     newTitle: '',
     newUrl: ''
   },
@@ -31,6 +31,11 @@ var devhub_url = new Vue({
       this.newUrl = '';
 
       storage.save(this.urls);
+
+      // background.js へ更新通知
+      chrome.runtime.sendMessage({"update_option": true},function(response) {
+        console.log(response);
+      });
     }
   }
 });

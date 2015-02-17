@@ -8,39 +8,74 @@ function updateBadge(count){
   }
 }
 
-function setWebSocket(url){
-  var socket = io.connect(url ,{query: 'from=chrome'});
-  socket.on('message', function(data){
-    if (data.avatar && !data.avatar.match(/^http/)){
-      data.avatar = url + data.avatar;
+var STORAGE_KEY = 'devhub_url';
+var storage = {
+  fetch: function () {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  },
+  save: function (urls) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(urls));
+  }
+};
+
+var devhubSocket = {
+  urls: storage.fetch(),
+  //urls: ["http://dev-hub.herokuapp.com","http://localhost:3000"],
+  messages: [],
+  message_count: 0,
+
+  connectAll: function(){
+    for (var i = 0; i < this.urls.length; i++){
+      this.setSocket(this.urls[i]);
     }
-    messages.unshift(data);
-    if (MAX_MESSAGE_COUNT <= messages.length){
-      messages.pop();
+  },
+
+  reflesh: function(){
+    for (var i = 0; i < this.urls.length; i++){
+      if (this.urls[i].socket){
+        this.urls[i].socket.disconnect();
+        delete io.sockets[this.urls[i].url];
+      }
     }
-    message_count++;
-    updateBadge(message_count);
-  });
+    io.j = [];
+
+    this.urls = storage.fetch();
+    this.connectAll();
+  },
+
+  setSocket: function(url_obj){
+    var self = this;
+    var url = url_obj.url;
+    // 再接続するには 'force new connection' が必要だった
+    url_obj.socket = io.connect(url ,{'force new connection': true, query: 'from=chrome'});
+    url_obj.socket.on('message', function(data){
+      if (data.avatar && !data.avatar.match(/^http/)){
+        data.avatar = url.replace(/\/$/,'') + "/" + data.avatar.replace(/^\//,'');;
+      }
+      self.messages.unshift(data);
+      if (MAX_MESSAGE_COUNT <= self.messages.length){
+        self.messages.pop();
+      }
+      self.message_count++;
+      updateBadge(self.message_count);
+    });
+  }
 }
 
 var MAX_MESSAGE_COUNT = 30;
-// とりあえず固定で指定(オプションから出来るようにする)
-var urls = ["http://dev-hub.herokuapp.com","http://localhost:3000"];
 
-var message_count = 0;
-var messages = [];
+devhubSocket.connectAll();
 
-for (var i = 0; i < urls.length; i++){
-  setWebSocket(urls[i]);
-}
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.clear_count){
       // バッジを更新
       updateBadge(0);
-      message_count = 0;
+      devhubSocket.message_count = 0;
       sendResponse('ok');
       return;
+    }else if (request.update_option){
+      devhubSocket.reflesh();
     }
   }
 );
