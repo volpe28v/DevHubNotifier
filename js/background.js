@@ -20,7 +20,6 @@ var storage = {
 
 var devhubSocket = {
   urls: storage.fetch(),
-  //urls: ["http://dev-hub.herokuapp.com","http://localhost:3000"],
   messages: [],
   message_count: 0,
 
@@ -48,8 +47,10 @@ var devhubSocket = {
     url_obj.socket = io.connect(url ,{'force new connection': true, query: 'from=chrome'});
     url_obj.socket.on('message', function(data){
       if (data.avatar && !data.avatar.match(/^http/)){
-        data.avatar = url.replace(/\/$/,'') + "/" + data.avatar.replace(/^\//,'');;
+        data.avatar = url.replace(/\/$/,'') + "/" + data.avatar.replace(/^\//,'');
       }
+      data.room = url_obj.title;
+      data.room_url = url;
       self.messages.unshift(data);
       if (MAX_MESSAGE_COUNT <= self.messages.length){
         self.messages.pop();
