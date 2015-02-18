@@ -34,10 +34,8 @@ var devhubSocket = {
     for (var i = 0; i < this.urls.length; i++){
       if (this.urls[i].socket){
         this.urls[i].socket.disconnect();
-        delete io.sockets[this.urls[i].url];
       }
     }
-    io.j = [];
 
     this.urls = storage.fetch();
     this.connectAll();
