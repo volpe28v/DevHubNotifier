@@ -31,7 +31,14 @@ var devhub_url = new Vue({
       this.newUrl = '';
 
       storage.save(this.urls);
-
+      this.sendUpdate();
+    },
+    removeUrl: function (url) {
+      this.urls.$remove(url.$data);
+      storage.save(this.urls);
+      this.sendUpdate();
+    },
+    sendUpdate: function(){
       // background.js へ更新通知
       chrome.runtime.sendMessage({"update_option": true},function(response) {
         console.log(response);

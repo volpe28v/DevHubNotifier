@@ -17,6 +17,10 @@
         width: 350px;
       }
 
+      .destroy {
+        text-decoration: none !important;
+      }
+
       #success_message {
         margin-top: 10px;
         padding: 5px 10px;
@@ -72,7 +76,7 @@
 
               <ul>
                 <li v-repeat="urls">
-                  <label v-text="title"></label> - <label v-text="url"></label>
+                <label v-text="title"></label> - <label v-text="url"></label> <a class="destroy" v-on="click: removeUrl(this)">x</a>
                 </li>
               </ul>
             </section>
