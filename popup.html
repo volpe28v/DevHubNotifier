@@ -10,7 +10,7 @@
         <tr v-repeat="messages">
           <td v-show="!avatar" class="name" nowrap>{{name}}</td>
           <td v-show="avatar" class="avatar" nowrap><img v-attr="src:'{{avatar}}', alt:'{{name}}'"></td>
-          <td class="msg" nowrap>{{msg}}</td>
+          <td class="msg">{{msg}}</td>
           <td class="from-now" nowrap>{{date | fromNow}}</td>
           <td class="time" nowrap>{{date | formatDate}}</td>
         </tr>

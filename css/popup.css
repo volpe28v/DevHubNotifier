@@ -43,6 +43,13 @@ body {
   border-radius: 4px;
 }
 
+.msg {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .from-now {
   color: #aaa;
 }
