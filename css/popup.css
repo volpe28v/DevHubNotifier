@@ -1,5 +1,11 @@
 body {
   font: 13px Helvetica, arial, freesans, clean, sans-serif;
+  min-width: 400px;
+  min-height: 100px;
+}
+
+#notify_form {
+  float: right;
 }
 
 #abst{

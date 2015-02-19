@@ -9,19 +9,24 @@ function updateBadge(count){
 }
 
 var STORAGE_KEY = 'devhub_url';
+var STORAGE_NOTIFY = 'devhub_notify_enabled';
 var storage = {
-  fetch: function () {
+  fetchUrls: function () {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   },
-  save: function (urls) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(urls));
+  fetchNotify: function () {
+    return JSON.parse(localStorage.getItem(STORAGE_NOTIFY) == "true");
+  },
+  saveNotify: function (enabled) {
+    localStorage.setItem(STORAGE_NOTIFY, JSON.stringify(enabled));
   }
 };
 
 var devhubSocket = {
-  urls: storage.fetch(),
+  urls: storage.fetchUrls(),
   messages: [],
   message_count: 0,
+  notify_enabled: storage.fetchNotify(),
 
   connectAll: function(){
     for (var i = 0; i < this.urls.length; i++){
@@ -57,7 +62,19 @@ var devhubSocket = {
       }
       self.message_count++;
       updateBadge(self.message_count);
-    });
+
+      self.notify(data);
+   });
+  },
+  notify: function(data){
+    if (!this.notify_enabled){return}
+    var opt = {
+      type: 'basic',
+      title: data.room,
+      message: data.msg,
+      iconUrl: data.avatar || "icons/icon.png"
+    }
+    chrome.notifications.create("", opt, function(id){ /** Do Nothing */ });
   }
 }
 
@@ -75,6 +92,9 @@ chrome.runtime.onMessage.addListener(
       return;
     }else if (request.update_option){
       devhubSocket.reflesh();
+    }else if (request.notify_enabled != null){
+      devhubSocket.notify_enabled = request.notify_enabled;
+      storage.saveNotify(devhubSocket.notify_enabled);
     }
   }
 );

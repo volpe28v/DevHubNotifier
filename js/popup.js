@@ -1,7 +1,15 @@
 var message_list = new Vue({
   el: '#message_list',
   data: {
-    messages: []
+    messages: [],
+    notify_enabled: chrome.extension.getBackgroundPage().devhubSocket.notify_enabled
+  },
+
+  ready: function () {
+    this.$watch('notify_enabled', function () {
+      chrome.runtime.sendMessage({"notify_enabled": this.notify_enabled},function(response) {
+      });
+    }, true);
   },
 
   created: function () {
