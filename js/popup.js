@@ -14,13 +14,12 @@ var room_list = new Vue({
   ready: function () {
     this.$watch('urls', function () {
       storage.saveUrls(this.urls);
-      this.sendUpdate();
     }, true);
   },
 
   methods: {
     addUrl: function(){
-      if (this.newTitle == '' || this.newRrl == ''){
+      if (this.newTitle == '' || this.newUrl == ''){
         return;
       }
 
@@ -31,12 +30,10 @@ var room_list = new Vue({
       this.newTitle = '';
       this.newUrl = '';
 
-      storage.saveUrls(this.urls);
       this.sendUpdate();
     },
     removeUrl: function (url) {
       this.urls.$remove(url.$data);
-      storage.saveUrls(this.urls);
       this.sendUpdate();
     },
     sendUpdate: function(){

@@ -15,7 +15,7 @@ var devhubSocket = {
 
   connectAll: function(){
     for (var i = 0; i < this.urls.length; i++){
-      this.setSocket(this.urls[i]);
+      this.setSocket(this.urls[i],i);
     }
   },
 
@@ -30,7 +30,7 @@ var devhubSocket = {
     this.connectAll();
   },
 
-  setSocket: function(url_obj){
+  setSocket: function(url_obj,index){
     var self = this;
     var url = url_obj.url;
     // 再接続するには 'force new connection' が必要だった
@@ -48,7 +48,7 @@ var devhubSocket = {
       self.message_count++;
       updateBadge(self.message_count);
 
-      if (url_obj.notify){
+      if (storage.fetchUrls()[index].notify){
         self.notify(data);
       }
    });
