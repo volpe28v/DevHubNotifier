@@ -8,7 +8,7 @@
   </head>
   <body class="chrome-bootstrap">
     <div>
-      <table id="message_list">
+      <table v-show="exist_messages" id="message_list">
         <tr v-repeat="messages">
           <td class="room"><a v-attr="href:'{{room_url}}'" v-text="room" target="_devhub"></a></td>
           <td v-show="!avatar" class="name" nowrap>{{name}}</td>
@@ -41,7 +41,10 @@
         >
         <ul>
           <li v-repeat="urls">
-            <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label> <a class="destroy" v-on="click: removeUrl(this)">x</a>
+            <a v-attr="href: url" class="room-link" target="_devhub">
+              <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label>
+            </a>
+            <a class="destroy" v-on="click: removeUrl(this)">x</a>
           </li>
         </ul>
         <div class="check_explain">Check to enable notification.</div>

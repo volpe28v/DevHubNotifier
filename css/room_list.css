@@ -6,6 +6,14 @@
   width: 280px;
 }
 
+.room-link,
+.room-link label{
+  text-decoration: none !important;
+  color: #83756f !important;
+  font-weight: bold !important;
+  cursor: pointer;
+}
+
 .destroy {
   text-decoration: none !important;
 }

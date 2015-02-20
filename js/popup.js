@@ -4,6 +4,12 @@ var message_list = new Vue({
     messages: []
   },
 
+  computed: {
+    exist_messages: function(){
+      return this.messages.length > 0;
+    }
+  },
+
   created: function () {
     this.loadMessages();
   },

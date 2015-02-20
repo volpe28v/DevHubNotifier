@@ -50,7 +50,10 @@
 
               <ul>
                 <li v-repeat="urls">
-                  <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label> <a class="destroy" v-on="click: removeUrl(this)">x</a>
+                  <a v-attr="href: url" class="room-link" target="_devhub">
+                    <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label>
+                  </a>
+                  <a class="destroy" v-on="click: removeUrl(this)">x</a>
                 </li>
               </ul>
               <div class="check_explain">Check to enable notification.</div>
