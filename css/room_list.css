@@ -1,0 +1,21 @@
+.title {
+  width: 70px;
+}
+
+.url {
+  width: 280px;
+}
+
+.destroy {
+  text-decoration: none !important;
+}
+
+#room_list{
+  margin: 10px 10px;
+}
+
+.check_explain{
+  color: gray;
+}
+
+

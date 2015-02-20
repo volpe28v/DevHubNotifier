@@ -4,25 +4,8 @@ body {
   min-height: 100px;
 }
 
-.title{
-  width: 70px;
-}
-
-.url {
-  width: 280px;
-}
-
-.destroy {
-  text-decoration: none !important;
-}
-
-#message_list,
-#room_list{
+#message_list {
   margin: 10px 10px;
-}
-
-.check_explain{
-  color: gray;
 }
 
 #abst{

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>DevHubNotifier</title>
+    <link rel="stylesheet" href="css/room_list.css">
     <link rel="stylesheet" href="css/options.css">
     <link rel="stylesheet" href="css/chrome-bootstrap.css">
   </head>
@@ -23,7 +24,7 @@
           <header>
             <h1>URL</h1>
           </header>
-          <div id="devhub_url_app" class="content">
+          <div id="room_list" class="content">
             <section>
               <h3>DevHub URL</h3>
               <input
@@ -49,9 +50,10 @@
 
               <ul>
                 <li v-repeat="urls">
-                <label v-text="title"></label> - <label v-text="url"></label> <a class="destroy" v-on="click: removeUrl(this)">x</a>
+                  <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label> <a class="destroy" v-on="click: removeUrl(this)">x</a>
                 </li>
               </ul>
+              <div class="check_explain">Check to enable notification.</div>
             </section>
           </div>
         </div>
@@ -60,7 +62,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/vue.js"></script>
     <script src="js/storage.js"></script>
-    <script src="js/options.js"></script>
+    <script src="js/room_list.js"></script>
   </body>
 </html>
 

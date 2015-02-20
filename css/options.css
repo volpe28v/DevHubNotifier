@@ -2,18 +2,6 @@
   -webkit-margin-start: 170px
 }
 
-.title{
-  width: 100px;
-}
-
-.url {
-  width: 350px;
-}
-
-.destroy {
-  text-decoration: none !important;
-}
-
 #success_message {
   margin-top: 10px;
   padding: 5px 10px;
@@ -24,4 +12,4 @@
 #success_message.visible {
   opacity: 1;
 }
- 
+
