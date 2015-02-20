@@ -70,7 +70,7 @@ var devhubSocket = {
     if (!this.notify_enabled){return}
     var opt = {
       type: 'basic',
-      title: data.room,
+      title: data.name + " @" + data.room,
       message: data.msg,
       iconUrl: data.avatar || "icons/icon.png"
     }
