@@ -7,7 +7,7 @@
               "128": "icons/icon_128.png" },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "background": {
-      "scripts": ["js/jquery.min.js", "js/socket.io.js", "js/background.js"]
+      "scripts": ["js/jquery.min.js", "js/socket.io.js", "js/storage.js", "js/background.js"]
     },
     "permissions": [
       "http://*/","https://*/","notifications"

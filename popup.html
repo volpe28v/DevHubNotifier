@@ -3,26 +3,54 @@
   <head>
     <meta charset="utf-8">
     <link href="css/popup.css" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/chrome-bootstrap.css">
   </head>
-  <body>
-    <div id="message_list">
-      <div id="notify_form">
-        <input type="checkbox" v-model="notify_enabled">Show notification</input>
-      </div>
-      <table>
+  <body class="chrome-bootstrap">
+    <div>
+      <table id="message_list">
         <tr v-repeat="messages">
-          <td class="title"><a v-attr="href:'{{room_url}}'" v-text="room" target="_devhub"></a></td>
+          <td class="room"><a v-attr="href:'{{room_url}}'" v-text="room" target="_devhub"></a></td>
           <td v-show="!avatar" class="name" nowrap>{{name}}</td>
           <td v-show="avatar" class="avatar" nowrap><img v-attr="src:'{{avatar}}', alt:'{{name}}'"></td>
           <td class="msg">{{msg}}</td>
           <td class="from-now" nowrap>{{date | fromNow}}</td>
         </tr>
       </table>
+
+      <div id="room_list">
+        <input
+          type="text"
+          id="new_title"
+          class="title"
+          autofocus
+          autocomplete="off"
+          placeholder="Title"
+          v-model="newTitle"
+          v-on="keyup:addUrl| key enter"
+        >
+        <input
+          type="text"
+          id="new_url"
+          class="url"
+          autofocus
+          autocomplete="off"
+          placeholder="URL"
+          v-model="newUrl"
+          v-on="keyup:addUrl| key enter"
+        >
+        <ul>
+          <li v-repeat="urls">
+            <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label> <a class="destroy" v-on="click: removeUrl(this)">x</a>
+          </li>
+        </ul>
+        <div class="check_explain">Check to enable notification.</div>
+      </div>
     </div>
   </body>
   <script src="js/jquery.min.js"></script>
   <script src="js/vue.js"></script>
   <script src="js/moment.min.js"></script>
+  <script src="js/storage.js"></script>
   <script src="js/popup.js"></script>
 </html>
 

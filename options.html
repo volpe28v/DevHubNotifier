@@ -3,35 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>DevHubNotifier</title>
+    <link rel="stylesheet" href="css/options.css">
     <link rel="stylesheet" href="css/chrome-bootstrap.css">
-    <style>
-      .chrome-bootstrap .frame .view {
-        -webkit-margin-start: 170px
-      }
-
-      .title{
-        width: 100px;
-      }
-
-      .url {
-        width: 350px;
-      }
-
-      .destroy {
-        text-decoration: none !important;
-      }
-
-      #success_message {
-        margin-top: 10px;
-        padding: 5px 10px;
-        opacity: 0;
-        transition: opacity 0.5s ease-out;
-      }
-
-      #success_message.visible {
-        opacity: 1;
-      }
-    </style>
   </head>
   <body class="chrome-bootstrap">
     <div class="frame">
@@ -86,6 +59,7 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/vue.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/options.js"></script>
   </body>
 </html>

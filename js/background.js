@@ -8,25 +8,10 @@ function updateBadge(count){
   }
 }
 
-var STORAGE_KEY = 'devhub_url';
-var STORAGE_NOTIFY = 'devhub_notify_enabled';
-var storage = {
-  fetchUrls: function () {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  },
-  fetchNotify: function () {
-    return JSON.parse(localStorage.getItem(STORAGE_NOTIFY) == "true");
-  },
-  saveNotify: function (enabled) {
-    localStorage.setItem(STORAGE_NOTIFY, JSON.stringify(enabled));
-  }
-};
-
 var devhubSocket = {
   urls: storage.fetchUrls(),
   messages: [],
   message_count: 0,
-  notify_enabled: storage.fetchNotify(),
 
   connectAll: function(){
     for (var i = 0; i < this.urls.length; i++){
@@ -41,7 +26,7 @@ var devhubSocket = {
       }
     }
 
-    this.urls = storage.fetch();
+    this.urls = storage.fetchUrls();
     this.connectAll();
   },
 
@@ -63,11 +48,12 @@ var devhubSocket = {
       self.message_count++;
       updateBadge(self.message_count);
 
-      self.notify(data);
+      if (url_obj.notify){
+        self.notify(data);
+      }
    });
   },
   notify: function(data){
-    if (!this.notify_enabled){return}
     var opt = {
       type: 'basic',
       title: data.name + " @" + data.room,
@@ -92,9 +78,6 @@ chrome.runtime.onMessage.addListener(
       return;
     }else if (request.update_option){
       devhubSocket.reflesh();
-    }else if (request.notify_enabled != null){
-      devhubSocket.notify_enabled = request.notify_enabled;
-      storage.saveNotify(devhubSocket.notify_enabled);
     }
   }
 );

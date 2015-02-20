@@ -1,15 +1,57 @@
-var message_list = new Vue({
-  el: '#message_list',
+var room_list = new Vue({
+  el: '#room_list',
   data: {
-    messages: [],
-    notify_enabled: chrome.extension.getBackgroundPage().devhubSocket.notify_enabled
+    urls: storage.fetchUrls(),
+    newTitle: '',
+    newUrl: '',
+    filters: {
+      notify: function (url) {
+        return url.notify;
+      }
+    }
   },
 
   ready: function () {
-    this.$watch('notify_enabled', function () {
-      chrome.runtime.sendMessage({"notify_enabled": this.notify_enabled},function(response) {
-      });
+    this.$watch('urls', function () {
+      storage.saveUrls(this.urls);
+      this.sendUpdate();
     }, true);
+  },
+
+  methods: {
+    addUrl: function(){
+      if (this.newTitle == '' || this.newRrl == ''){
+        return;
+      }
+
+      this.urls.unshift({
+        title: this.newTitle,
+        url: this.newUrl
+      });
+      this.newTitle = '';
+      this.newUrl = '';
+
+      storage.saveUrls(this.urls);
+      this.sendUpdate();
+    },
+    removeUrl: function (url) {
+      this.urls.$remove(url.$data);
+      storage.saveUrls(this.urls);
+      this.sendUpdate();
+    },
+    sendUpdate: function(){
+      // background.js へ更新通知
+      chrome.runtime.sendMessage({"update_option": true},function(response) {
+        console.log(response);
+      });
+    }
+  }
+});
+
+var message_list = new Vue({
+  el: '#message_list',
+  data: {
+    messages: []
   },
 
   created: function () {

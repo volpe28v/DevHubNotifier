@@ -4,8 +4,25 @@ body {
   min-height: 100px;
 }
 
-#notify_form {
-  float: right;
+.title{
+  width: 70px;
+}
+
+.url {
+  width: 280px;
+}
+
+.destroy {
+  text-decoration: none !important;
+}
+
+#message_list,
+#room_list{
+  margin: 10px 10px;
+}
+
+.check_explain{
+  color: gray;
 }
 
 #abst{
@@ -39,6 +56,10 @@ body {
   font-size: 12px;
   font-weight: bold;
   color: red;
+}
+
+.room a {
+  text-decoration: none !important;
 }
 
 .avatar img {
