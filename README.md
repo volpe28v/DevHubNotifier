@@ -2,4 +2,5 @@
 
 ログインなしに複数のDevHubからチャット通知を受けられる ChromeExtension.
 
-まだまだ作成途中。
+![スクリーンショット](https://dl.dropboxusercontent.com/u/1215986/DevHubNotifier.png)
+
