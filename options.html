@@ -50,7 +50,7 @@
 
               <ul>
                 <li v-repeat="urls">
-                  <a v-attr="href: url" class="room-link" target="_devhub">
+                  <a class="room-link" v-on="click: showRoom(this)">
                     <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label>
                   </a>
                   <a class="destroy" v-on="click: removeUrl(this)">x</a>

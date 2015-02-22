@@ -41,6 +41,16 @@ var room_list = new Vue({
       chrome.runtime.sendMessage({"update_option": true},function(response) {
         console.log(response);
       });
+    },
+    showRoom: function(url){
+      chrome.tabs.query({url: url.url}, function(tabs){
+        if (tabs.length > 0){
+          chrome.tabs.update(tabs[0].id, {selected:true});
+        }else{
+          chrome.tabs.create({url: url.url})
+        }
+      });
+      return false;
     }
   }
 });

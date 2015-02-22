@@ -26,6 +26,16 @@ var message_list = new Vue({
   methods: {
     loadMessages: function(){
       this.messages = chrome.extension.getBackgroundPage().devhubSocket.messages;
+    },
+    showRoom: function(message){
+      chrome.tabs.query({url: message.room_url}, function(tabs){
+        if (tabs.length > 0){
+          chrome.tabs.update(tabs[0].id, {selected:true});
+        }else{
+          chrome.tabs.create({url: message.room_url})
+        }
+      });
+      return false;
     }
   }
 });
