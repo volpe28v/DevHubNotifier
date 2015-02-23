@@ -50,8 +50,9 @@
 
               <ul>
                 <li v-repeat="urls">
+                  <input type="checkbox" v-model="notify"></input>
                   <a class="room-link" v-on="click: showRoom(this)">
-                    <input type="checkbox" v-model="notify"></input> <label v-text="title"></label> - <label v-text="url"></label>
+                    <label v-text="title"></label> - <label v-text="url"></label>
                   </a>
                   <a class="destroy" v-on="click: removeUrl(this)">x</a>
                 </li>
