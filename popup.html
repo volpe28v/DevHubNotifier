@@ -8,22 +8,11 @@
   </head>
   <body class="chrome-bootstrap">
     <div>
-      <table v-show="exist_messages" id="message_list">
-        <tr v-repeat="messages">
-          <td class="room"><a v-text="room" v-on="click: showRoom(this)"></a></td>
-          <td v-show="!avatar" class="name" nowrap>{{name}}</td>
-          <td v-show="avatar" class="avatar" nowrap><img v-attr="src:'{{avatar}}', alt:'{{name}}'"></td>
-          <td class="msg">{{msg}}</td>
-          <td class="from-now" nowrap>{{date | fromNow}}</td>
-        </tr>
-      </table>
-
       <div id="room_list">
         <input
           type="text"
           id="new_title"
           class="title"
-          autofocus
           autocomplete="off"
           placeholder="Title"
           v-model="newTitle"
@@ -33,7 +22,6 @@
           type="text"
           id="new_url"
           class="url"
-          autofocus
           autocomplete="off"
           placeholder="URL"
           v-model="newUrl"
@@ -50,6 +38,15 @@
         </ul>
         <div class="check_explain">Check to enable notification.</div>
       </div>
+      <table v-show="exist_messages" id="message_list">
+        <tr v-repeat="messages">
+          <td class="room"><a v-text="room" v-on="click: showRoom(this)"></a></td>
+          <td v-show="!avatar" class="name" nowrap>{{name}}</td>
+          <td v-show="avatar" class="avatar" nowrap><img v-attr="src:'{{avatar}}', alt:'{{name}}'"></td>
+          <td class="msg">{{msg}}</td>
+          <td class="from-now" nowrap>{{date | fromNow}}</td>
+        </tr>
+      </table>
     </div>
   </body>
   <script src="js/jquery.min.js"></script>
