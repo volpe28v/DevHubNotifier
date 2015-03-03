@@ -9,34 +9,39 @@
   <body class="chrome-bootstrap">
     <div>
       <div id="room_list">
-        <input
-          type="text"
-          id="new_title"
-          class="title"
-          autocomplete="off"
-          placeholder="Title"
-          v-model="newTitle"
-          v-on="keyup:addUrl| key enter"
-        >
-        <input
-          type="text"
-          id="new_url"
-          class="url"
-          autocomplete="off"
-          placeholder="URL"
-          v-model="newUrl"
-          v-on="keyup:addUrl| key enter"
-        >
-        <ul>
-          <li v-repeat="urls">
-            <input type="checkbox" v-model="notify"></input>
-            <a class="room-link" v-on="click: showRoom(this)">
-              <label v-text="title"></label> - <label v-text="url"></label>
-            </a>
-            <a class="destroy" v-on="click: removeUrl(this)">x</a>
-          </li>
-        </ul>
-        <div class="check_explain">Check to enable notification.</div>
+        <div v-show="enable_form">
+          <input
+            type="text"
+            id="new_title"
+            class="title"
+            autocomplete="off"
+            placeholder="Title"
+            v-model="newTitle"
+            v-on="keyup:addUrl| key enter"
+          >
+          <input
+            type="text"
+            id="new_url"
+            class="url"
+            autocomplete="off"
+            placeholder="URL"
+            v-model="newUrl"
+            v-on="keyup:addUrl| key enter"
+          >
+          <ul>
+            <li v-repeat="urls">
+              <input type="checkbox" v-model="notify"></input>
+              <a class="room-link" v-on="click: showRoom(this)">
+                <label v-text="title"></label> - <label v-text="url"></label>
+              </a>
+              <a class="destroy" v-on="click: removeUrl(this)">x</a>
+            </li>
+          </ul>
+          <div class="check_explain">Check to enable notification.</div>
+        </div>
+        <div v-show="!enable_form">
+          <a v-on="click: editForm()" class="edit-list">Edit url list</a>
+        </div>
       </div>
       <table v-show="exist_messages" id="message_list">
         <tr v-repeat="messages">

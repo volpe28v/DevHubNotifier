@@ -7,7 +7,8 @@
 }
 
 .room-link,
-.room-link label{
+.room-link label,
+.edit-list {
   text-decoration: none !important;
   color: #83756f !important;
   font-weight: bold !important;
