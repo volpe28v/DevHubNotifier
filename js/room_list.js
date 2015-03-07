@@ -4,11 +4,17 @@ var room_list = new Vue({
     urls: storage.fetchUrls(),
     newTitle: '',
     newUrl: '',
-    enable_form: false,
+    edit_form: false,
     filters: {
       notify: function (url) {
         return url.notify;
       }
+    }
+  },
+
+  computed: {
+    enable_form: function(){
+      return this.urls.length > 0 ? this.edit_form : true;
     }
   },
 
@@ -20,6 +26,7 @@ var room_list = new Vue({
 
   methods: {
     addUrl: function(){
+      this.edit_form = true;
       if (this.newTitle == '' || this.newUrl == ''){
         return;
       }
@@ -54,7 +61,7 @@ var room_list = new Vue({
       return false;
     },
     editForm: function(){
-      this.enable_form = true;
+      this.edit_form = true;
     }
   }
 });
