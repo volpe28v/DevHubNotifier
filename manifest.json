@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "DevHubNotifier",
-    "version": "1.4",
+    "version": "1.5",
     "description": "DevHubの発言を通知",
     "icons": { "48": "icons/icon_048.png",
               "128": "icons/icon_128.png" },
@@ -10,7 +10,7 @@
       "scripts": ["js/jquery.min.js", "js/socket.io.js", "js/storage.js", "js/background.js"]
     },
     "permissions": [
-      "http://*/","https://*/","notifications"
+      "tabs","http://*/","https://*/","notifications"
     ],
     "browser_action" : {
       "default_icon" : "icons/icon.png",
