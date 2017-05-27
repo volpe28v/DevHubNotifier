@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "DevHubNotifier",
-    "version": "2.0",
+    "version": "2.1",
     "description": "DevHubの発言を通知",
     "icons": { "48": "icons/icon_048.png",
               "128": "icons/icon_128.png" },
